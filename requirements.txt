@@ -1,0 +1,6 @@
+flask
+flask_restful
+bcrypt
+mysql-connector-python
+gunicorn
+unittest2
