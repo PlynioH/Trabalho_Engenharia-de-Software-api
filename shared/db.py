@@ -15,3 +15,11 @@ class db:
         val = (userobject.nome, userobject.cpf, userobject.email, userobject.numregistro, userobject.localtrab, userobject.user, userobject.senha)
         mycursor.execute(sql, val)
         self.mydb.commit()
+    
+    def login(self, loginobject):
+        mycursor = self.mydb.curson()
+        sql = "SELECT * FROM usuario WHERE nomeusuario = " + loginobject.user + ""
+        mycursor.execute(sql)
+        myresult = mycursor.fetchall()
+        for x in myresult:
+            print(x)
