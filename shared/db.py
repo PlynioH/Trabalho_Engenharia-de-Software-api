@@ -17,7 +17,7 @@ class db:
         self.mydb.commit()
     
     def login(self, loginobject):
-        mycursor = self.mydb.curson()
+        mycursor = self.mydb.cursor()
         sql = "SELECT * FROM usuario WHERE nomeusuario = " + loginobject.user + ""
         mycursor.execute(sql)
         myresult = mycursor.fetchall()
