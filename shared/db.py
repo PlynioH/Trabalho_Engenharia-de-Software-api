@@ -26,8 +26,8 @@ class db:
         
     def cadastroPaciente(self, pacienteobject):
         mycursor = self.mydb.cursor()
-        sql = "INSERT INTO paciente (nome, idade, sexo, tiposanguineo, alergiamedicamento, telefone, cpf, rg, nomemedico, nomepai, nomemae) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-        val = (pacienteobject.pnome, pacienteobject.pidade, pacienteobject.psexo, pacienteobject.tiposang, pacienteobject.alergia, pacienteobject.ptelefone, pacienteobject.pcpf, pacienteobject.prg, pacienteobject.pmedico, pacienteobject.ppai, pacienteobject.pmae)
+        sql = "INSERT INTO paciente (nome, idade, sexo, tiposanguineo, alergiamedicamento, gravidade, telefone, cpf, rg, nomemedico, nomepai, nomemae) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        val = (pacienteobject.pnome, pacienteobject.pidade, pacienteobject.psexo, pacienteobject.tiposang, pacienteobject.alergia, pacienteobject.pgravidade, pacienteobject.ptelefone, pacienteobject.pcpf, pacienteobject.prg, pacienteobject.pmedico, pacienteobject.ppai, pacienteobject.pmae)
         mycursor.execute(sql, val)
         self.mydb.commit()
         

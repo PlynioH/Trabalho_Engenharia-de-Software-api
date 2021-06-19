@@ -5,6 +5,7 @@ class paciente:
         self.psexo = json['sexo']
         self.tiposang = json['tiposanguineo']
         self.alergia = json['alergiamedicamento']
+        self.pgravidade = json['gravidade']
         self.ptelefone = json['telefone']
         self.pcpf = json['cpf']
         self.prg = json['rg']
