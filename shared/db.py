@@ -1,4 +1,3 @@
-from coh_api.features.cadastro_leito.models.leito import leito
 import mysql.connector
 import bcrypt
 import os
