@@ -1,4 +1,5 @@
 import mysql.connector
+import bcrypt
 import os
 class db:
     def __init__(self):
@@ -18,8 +19,33 @@ class db:
     
     def login(self, loginobject):
         mycursor = self.mydb.cursor()
-        sql = "SELECT * FROM usuario WHERE nomeusuario = " + loginobject.user + ""
+        sql = "SELECT nomeusuario FROM usuario WHERE nomeusuario = '"+ loginobject.user +"'" 
         mycursor.execute(sql)
-        myresult = mycursor.fetchall()
-        for x in myresult:
-            print(x)
+        myresult = mycursor.fetchone()
+        loginUsuario = ''
+        senhaUsuario = ''
+        try:
+            for x in myresult:
+                loginUsuario = x
+            print(loginUsuario)
+        except:
+            pass
+        sql2 = "SELECT senhausuario FROM usuario WHERE nomeusuario = '"+ loginobject.user +"'" 
+        mycursor.execute(sql2)
+        myresult = mycursor.fetchone()
+        try:
+            for y in myresult:
+                senhaUsuario = y
+            print(senhaUsuario)
+        except:
+            pass
+        try:
+            if bcrypt.hashpw(loginobject.senha.encode('utf-8'), senhaUsuario) == senhaUsuario and loginUsuario == loginobject.user:
+                print("match")
+                return True
+            else:
+                print("does not match")
+                return False
+        except:
+            print("does not match")
+            return False

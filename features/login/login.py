@@ -8,5 +8,5 @@ class Login(Resource):
         data = request.json
         model = LoginModel(data)
         banco = db()
-        banco.login(model)
-        return {"status": 200}
+        retorno = banco.login(model)
+        return {"status": retorno}
