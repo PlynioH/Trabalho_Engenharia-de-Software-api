@@ -1,3 +1,4 @@
+from coh_api.features.cadastro_leito.models.leito import leito
 import mysql.connector
 import bcrypt
 import os
@@ -14,6 +15,13 @@ class db:
         mycursor = self.mydb.cursor()
         sql = "INSERT INTO usuario (nome, cpf, email, numregistro, localtrabalho, nomeusuario, senhausuario) VALUES (%s, %s, %s, %s, %s, %s, %s)"
         val = (userobject.nome, userobject.cpf, userobject.email, userobject.numregistro, userobject.localtrab, userobject.user, userobject.senha)
+        mycursor.execute(sql, val)
+        self.mydb.commit()
+        
+    def cadastroLeito(self, leitoobject):
+        mycursor = self.mydb.cursor()
+        sql = "INSERT INTO leito (numeroleito, numeroequipamento, quarto, ocupacao) VALUES (%s, %s, %s, %s)"
+        val = (leitoobject.nleito, leitoobject.nequipamento, leitoobject.nquarto, leitoobject.ocup)
         mycursor.execute(sql, val)
         self.mydb.commit()
     
