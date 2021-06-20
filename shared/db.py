@@ -1,3 +1,4 @@
+from features.taxa_ocupacao.models.taxamodel import TaxaOcupacaoModel
 import mysql.connector
 import bcrypt
 import os
@@ -9,7 +10,41 @@ class db:
             password= os.environ['password'],
             database= os.environ['database']
         )
-    
+    def limpar(self, texto):
+        ovo = texto.replace('(', '')
+        ovo = ovo.replace(',', '')
+        ovo = ovo.replace(')', '')
+        return ovo
+
+    def taxaocupacao(self):
+        mycursor = self.mydb.cursor()
+        sql = "SELECT count(numcadastro) as t FROM paciente"
+        mycursor.execute(sql)
+        myresult = mycursor.fetchone()
+        numeroClientes = self.limpar(str(myresult))
+        sql = "SELECT count(numeroleito) as t FROM leito"
+        mycursor.execute(sql)
+        myresult = mycursor.fetchone()
+        numeroLeito = self.limpar(str(myresult))
+        sql = "SELECT count(numeroequipamento) as t FROM leito"
+        mycursor.execute(sql)
+        myresult = mycursor.fetchone()
+        numeroEquipamento = self.limpar(str(myresult))
+        sql = "SELECT count(ocupacao) as t FROM leito WHERE ocupacao = 'ocupado'"
+        mycursor.execute(sql)
+        myresult = mycursor.fetchone()
+        qtdocupado = str(int(((int(self.limpar(str(myresult))) * 100)/int(numeroLeito)))) + '%'
+        situacao = ''
+        if(int(((int(self.limpar(str(myresult))) * 100)/int(numeroLeito))) <= 50):
+            situacao = 'Ok'
+        elif(int(((int(self.limpar(str(myresult))) * 100)/int(numeroLeito))) > 50 and int(((int(self.limpar(str(myresult))) * 100)/int(numeroLeito))) < 80):
+            situacao = 'Alerta'
+        else:
+            situacao = 'Crítico'
+        model = TaxaOcupacaoModel(numeroLeito,numeroEquipamento,numeroClientes,qtdocupado,situacao)
+        return model
+        
+                    
     def cadastrouser(self, userobject):
         mycursor = self.mydb.cursor()
         sql = "INSERT INTO usuario (nome, cpf, email, numregistro, localtrabalho, nomeusuario, senhausuario) VALUES (%s, %s, %s, %s, %s, %s, %s)"
