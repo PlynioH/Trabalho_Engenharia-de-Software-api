@@ -65,7 +65,7 @@ class db:
         val = (pacienteobject.pnome, pacienteobject.pidade, pacienteobject.psexo, pacienteobject.tiposang, pacienteobject.alergia, pacienteobject.pgravidade, pacienteobject.ptelefone, pacienteobject.pcpf, pacienteobject.prg, pacienteobject.pquarto, pacienteobject.pmedico, pacienteobject.ppai, pacienteobject.pmae)
         mycursor.execute(sql, val)
         self.mydb.commit()
-        sql = "ALTER TABLE leito ADD CONSTRAINT ocupacao = 'Ocupado' WHERE quarto = '"+ pacienteobject.pquarto +"'"
+        sql = "UPDATE leito SET ocupacao = 'Ocupado' WHERE quarto = '"+ pacienteobject.pquarto +"'"
         mycursor.execute(sql)
         self.mydb.commit()
         
