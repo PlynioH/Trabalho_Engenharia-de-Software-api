@@ -9,6 +9,7 @@ class paciente:
         self.ptelefone = json['telefone']
         self.pcpf = json['cpf']
         self.prg = json['rg']
+        self.pquarto = json['quarto']
         self.pmedico = json['nomemedico']
         self.ppai = json['nomepai']
         self.pmae = json['nomemae']
