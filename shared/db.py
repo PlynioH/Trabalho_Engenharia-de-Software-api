@@ -44,6 +44,21 @@ class db:
         model = TaxaOcupacaoModel(numeroLeito,numeroEquipamento,numeroClientes,qtdocupado,situacao)
         return model
         
+    def buscarCpf(self, json):
+        mycursor = self.mydb.cursor()
+        sql = "SELECT cpf FROM paciente WHERE cpf = '"+ json['cpf'] +"'"
+        mycursor.execute(sql)
+        myresult = mycursor.fetchone()
+        cpf = self.limpar(str(myresult))
+        sql = "SELECT nome FROM paciente WHERE cpf = '"+ json['cpf'] +"'"
+        mycursor.execute(sql)
+        myresult = mycursor.fetchone()
+        nome = self.limpar(str(myresult))
+        sql = "SELECT nquarto FROM paciente WHERE cpf = '"+ json['cpf'] +"'"
+        mycursor.execute(sql)
+        myresult = mycursor.fetchone()
+        quarto = self.limpar(str(myresult))
+        return f'{"cpf": {cpf}, "nome": {nome}, "quarto": {quarto}}'
                     
     def cadastrouser(self, userobject):
         mycursor = self.mydb.cursor()

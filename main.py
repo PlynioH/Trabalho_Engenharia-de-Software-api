@@ -1,5 +1,6 @@
 
 
+from features.Buscar_cpf.buscar_cpf import BuscarCpf
 from features.taxa_ocupacao.taxaocupacao import TaxaOcupacao
 from features.Cadastro_paciente.cadastro_paciente import CadastroPaciente
 from features.cadastro_leito.cadastro_leito import CadastroLeito
@@ -18,6 +19,8 @@ api.add_resource(Login, '/login')
 api.add_resource(CadastroLeito, '/cadastro/leito')
 api.add_resource(CadastroPaciente, '/cadastro/paciente')
 api.add_resource(TaxaOcupacao, '/taxaocupacao')
+api.add_resource(BuscarCpf, '/buscar')
+
 
 if __name__ == '__main__':
     app.run()
