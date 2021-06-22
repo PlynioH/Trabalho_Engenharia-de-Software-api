@@ -58,7 +58,7 @@ class db:
         mycursor.execute(sql)
         myresult = mycursor.fetchone()
         quarto = self.limpar(str(myresult))
-        return f'{"cpf": {cpf}, "nome": {nome}, "quarto": {quarto}}'
+        return {"cpf": cpf, "nome": nome, "quarto": quarto}
                     
     def cadastrouser(self, userobject):
         mycursor = self.mydb.cursor()
