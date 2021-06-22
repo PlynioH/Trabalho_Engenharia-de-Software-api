@@ -43,7 +43,16 @@ class db:
             situacao = 'Crítico'
         model = TaxaOcupacaoModel(numeroLeito,numeroEquipamento,numeroClientes,qtdocupado,situacao)
         return model
-        
+    
+    def deletarPaciente(self, json):
+        mycursor = self.mydb.cursor()
+        sql = "DELETE FROM pacientes WHERE cpf = '"+ json['cpf'] +"'"
+        mycursor.execute(sql)
+        self.mydb.commit()
+        sql = "UPDATE leito SET ocupacao = 'Livre' WHERE quarto = '"+ json['quarto'] +"'"
+        mycursor.execute(sql)
+        self.mydb.commit()
+    
     def buscarCpf(self, json):
         mycursor = self.mydb.cursor()
         sql = "SELECT cpf FROM paciente WHERE cpf = '"+ json['cpf'] +"'"
